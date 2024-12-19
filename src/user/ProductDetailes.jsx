@@ -8,11 +8,12 @@ const ProductDetailes = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showPopup, setShowPopup] = useState(false); // State to manage popup visibility
     const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5001/products/${id}`)
+            .get(`http://localhost:5003/products/${id}`)
             .then((response) => {
                 setProduct(response.data);
                 setLoading(false);
@@ -26,27 +27,31 @@ const ProductDetailes = () => {
     // Handle Add to Cart
     const handleAddToCart = () => {
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-        // Check if the product is already in the cart
         const productExists = cart.find((item) => item.id === product.id);
-    
+
         if (productExists) {
             productExists.quantity += 1; // Increment quantity if it exists
         } else {
             cart.push({ ...product, quantity: 1 }); // Add new product with quantity 1
         }
-    
-        localStorage.setItem("cart", JSON.stringify(cart)); // Save to localStorage
-        navigate("/cart"); // Redirect to Cart page
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        // Show the popup and hide it after 3 seconds
+        setShowPopup(true);
+        setTimeout(() => setShowPopup(false), 3000);
     };
-    
+
     // Handle Buy Now
     const handleBuyNow = () => {
-        // Add the product directly to cart and redirect to checkout page
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cart.push({ ...product, quantity: 1 });
+        navigate("/Checkout")
+
+        if (!productExists) {
+            cart.push({ ...product, quantity: 1 }); // Add new product if not in cart
+        }
+
         localStorage.setItem("cart", JSON.stringify(cart));
-        navigate("/checkout");
+        navigate("/checkout"); // Redirect to Checkout page
     };
 
     if (loading) return <div>Loading...</div>;
@@ -55,7 +60,14 @@ const ProductDetailes = () => {
     return (
         <>
             <Navbar />
-            <div className="p-6 bg-gray-100 min-h-screen">
+            <div className="p-6 bg-gray-100 min-h-screen relative">
+                {/* Popup Notification */}
+                {showPopup && (
+                    <div className="absolute top-6 right-6 bg-green-600 text-white px-4 py-2 rounded shadow-lg">
+                        The item has been added to your cart!
+                    </div>
+                )}
+
                 <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -86,13 +98,13 @@ const ProductDetailes = () => {
 
                             <div className="mt-6">
                                 <button
-                                    onClick={handleAddToCart}  // Add to Cart functionality
+                                    onClick={handleAddToCart}
                                     className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
                                 >
                                     Add to Cart
                                 </button>
                                 <button
-                                    onClick={handleBuyNow}  // Buy Now functionality
+                                    onClick={handleBuyNow}
                                     className="bg-green-600 text-white py-2 px-4 ml-4 rounded hover:bg-green-700"
                                 >
                                     Buy Now

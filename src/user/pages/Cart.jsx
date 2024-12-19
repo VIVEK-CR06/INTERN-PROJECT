@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
+
+    const navigate = useNavigate();
 
     // Load cart data from localStorage on component mount
     useEffect(() => {
@@ -103,10 +106,10 @@ const Cart = () => {
                             </p>
                         </div>
                         <div className="flex justify-between">
-                            <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full mr-2">
+                            <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 w-full mr-2" onClick={()=>{   navigate("/Checkout")}}>
                                 Proceed to Checkout
                             </button>
-                            <button className="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 w-full">
+                            <button className="bg-gray-600 text-white py-2 px-4 rounded hover:bg-gray-700 w-full" onClick={() => { navigate ("/Home")}}>
                                 Continue Shopping
                             </button>
                         </div>

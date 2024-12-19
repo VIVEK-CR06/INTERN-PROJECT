@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     
     axios
-      .get("http://localhost:5001/products")
+      .get("http://localhost:5003/products")
       .then((response) => {
         setProducts(response.data); 
       })
@@ -30,7 +30,7 @@ const Home = () => {
         <div className="container mx-auto">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Products</h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pt-20 lg:pt-0">
             {products.map((product) => (
 
                 
