@@ -2,6 +2,13 @@ import React from 'react'
 import { Routes,Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
+import AdminNavbar from './components/AdminNavbar';
+import AdminHome from './admin/AdminHome';
+import ManageProducts from './admin/pages/ManageProducts';
+import ManageUsers from './admin/pages/ManageUsers';
+import Dashboard from './admin/pages/Dashboard';
+import ManageOrders from './admin/pages/ManageOrders';
+
 import Login from './Authentication/pages/Login';
 import SignUp from './Authentication/pages/SignUp';
 import Home from './user/pages/Home';
@@ -23,6 +30,13 @@ const App = () => {
           <Route path='/signup' element={<SignUp/>} />
           <Route path='/' element={<Home/>} />
           <Route path='/products/:id' element={<ProductDetailes/>} />
+
+          <Route path='/adminhome' element={<AdminHome/>} />
+          <Route path='/adminnavbar' element={<AdminNavbar/>} />
+          <Route path='/dashbord' element={<Dashboard/>} />
+          <Route path='/manageproducts' element={<ManageProducts/>} />
+          <Route path='/manageusers' element={<ManageUsers/>} />
+          <Route path='/manageorders' element={<ManageOrders/>} />
 
           <Route
             path='/cart'

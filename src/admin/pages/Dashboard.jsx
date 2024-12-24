@@ -1,39 +1,24 @@
 import React, { useState, useEffect } from "react";
 import AdminNavbar from "../../components/AdminNavbar";
+import { fetchOrders, fetchProducts } from "../../api/AdminApi";
+import { fetchUsers } from "../../api/userApi";
 
 const Dashboard = () => {
-  const [data, setData] = useState({
-    totalUsers: 0,
-    totalProducts: 0,
-    totalOrders: 0,
-    totalRevenue: 0,
-    todaysOrders: 0,
-    pendingOrders: 0,
-    shippedOrders: 0,
-    todaysRevenue: 0,
-    feedback: [],
-  });
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalRevenue, setTotalRevenue] = useState(0);
 
   useEffect(() => {
-    // Replace with API calls to fetch dashboard data
-    const fetchData = async () => {
-      const mockData = {
-        totalUsers: 1023,
-        totalProducts: 245,
-        totalOrders: 534,
-        totalRevenue: 82345,
-        todaysOrders: 12,
-        pendingOrders: 20,
-        shippedOrders: 500,
-        todaysRevenue: 3456,
-        feedback: [
-          { user: "John Doe", comment: "Great service!" },
-          { user: "Jane Smith", comment: "Fast delivery, loved it!" },
-        ],
-      };
-      setData(mockData);
-    };
-    fetchData();
+    fetchProducts().then((res) => setTotalProducts(res.data.length));
+    fetchUsers().then((res) => setTotalUsers(res.data.length));
+    fetchOrders().then((res) => {
+      setTotalOrders(res.data.length);
+      setTotalRevenue(
+        res.data.reduce((total, order) => total + order.total, 0)
+      );
+    }
+    );
   }, []);
 
   return (
@@ -51,40 +36,24 @@ const Dashboard = () => {
           {/* Dashboard Cards */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-800">Total Users</h2>
-            <p className="text-3xl font-bold text-blue-600">{data.totalUsers}</p>
+            <p className="text-3xl font-bold text-blue-600">{totalUsers}</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-800">Total Products</h2>
-            <p className="text-3xl font-bold text-green-600">{data.totalProducts}</p>
+            <p className="text-3xl font-bold text-green-600">{totalProducts}</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-800">Total Orders</h2>
-            <p className="text-3xl font-bold text-purple-600">{data.totalOrders}</p>
+            <p className="text-3xl font-bold text-purple-600">{totalOrders}</p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-800">Total Revenue</h2>
-            <p className="text-3xl font-bold text-red-600">₹{data.totalRevenue.toLocaleString()}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold text-gray-800">Today's Orders</h2>
-            <p className="text-3xl font-bold text-yellow-600">{data.todaysOrders}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold text-gray-800">Pending Orders</h2>
-            <p className="text-3xl font-bold text-orange-600">{data.pendingOrders}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold text-gray-800">Shipped Orders</h2>
-            <p className="text-3xl font-bold text-indigo-600">{data.shippedOrders}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow">
-            <h2 className="text-xl font-semibold text-gray-800">Today's Revenue</h2>
-            <p className="text-3xl font-bold text-teal-600">₹{data.todaysRevenue.toLocaleString()}</p>
+            <p className="text-3xl font-bold text-red-600">₹{totalRevenue}</p>
           </div>
         </div>
 
         {/* Feedback Section */}
-        <div className="mt-8 bg-white p-6 rounded-lg shadow">
+        {/* <div className="mt-8 bg-white p-6 rounded-lg shadow">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4">Feedback</h2>
           {data.feedback.length > 0 ? (
             <ul className="space-y-4">
@@ -101,7 +70,7 @@ const Dashboard = () => {
           ) : (
             <p className="text-gray-600">No feedback available.</p>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
 

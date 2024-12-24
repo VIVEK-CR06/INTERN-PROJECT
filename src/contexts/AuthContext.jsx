@@ -62,9 +62,15 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("role", foundedUser.role)
 
             setUser(foundedUser);
+            if(foundedUser.role === "user") {
             setTimeout(() => {
                 navigate("/");
-            }, 1000);
+            }, 1000);}
+            else {
+                setTimeout(() => {
+                    navigate("/adminhome");
+                }, 1000);
+            }
 
         } catch (error) {
             throw error;

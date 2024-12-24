@@ -1,168 +1,153 @@
-// src/components/ProductManagement.js
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
+import { fetchProducts } from '../../api/AdminApi';
 
 const ManageProducts = () => {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'Sample Product 1',
-      price: 29.99,
-      image: 'https://via.placeholder.com/150',
-      isSoldOut: false,
-    },
-    {
-      id: 2,
-      name: 'Sample Product 2',
-      price: 49.99,
-      image: 'https://via.placeholder.com/150',
-      isSoldOut: false,
-    },
-  ]);
-  const [productName, setProductName] = useState('');
-  const [productPrice, setProductPrice] = useState('');
-  const [productImage, setProductImage] = useState('');
-  const [editingProductId, setEditingProductId] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [newProduct, setNewProduct] = useState([]);
+
+  useEffect(() => {
+    fetchProducts().then(res => setProducts(res.data));
+  }, []);
+    
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct({ ...newProduct, [name]: value });
+  };
 
   const handleAddProduct = () => {
-    const newProduct = {
-      id: Date.now(),
-      name: productName,
-      price: productPrice,
-      image: productImage,
-      isSoldOut: false,
-    };
-    setProducts([...products, newProduct]);
-    setProductName('');
-    setProductPrice('');
-    setProductImage('');
+    setProducts([
+      ...products,
+      { ...newProduct, id: Date.now(), price: parseFloat(newProduct.price) },
+    ]);
+    setNewProduct({ brand: '', name: '', price: '', image: '', description: '', specification: '' });
   };
 
-  const handleDeleteProduct = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
-  };
+  // const handleEditProduct = (id) => {
+  //   // Logic for editing a product
+  //   const updatedProducts = products.map((product) =>
+  //     product.id === id ? { ...product, ...newProduct } : product
+  //   );
+  //   setProducts(updatedProducts);
+  // };
 
-  const handleEditProduct = (id) => {
-    const productToEdit = products.find((product) => product.id === id);
-    setProductName(productToEdit.name);
-    setProductPrice(productToEdit.price);
-    setProductImage(productToEdit.image);
-    setEditingProductId(id);
-  };
-
-  const handleSaveEdit = () => {
-    const updatedProducts = products.map((product) =>
-      product.id === editingProductId
-        ? { ...product, name: productName, price: productPrice, image: productImage }
-        : product
-    );
-    setProducts(updatedProducts);
-    setEditingProductId(null);
-    setProductName('');
-    setProductPrice('');
-    setProductImage('');
-  };
-
-  const handleSoldOut = (id) => {
-    setProducts(
-      products.map((product) =>
-        product.id === id ? { ...product, isSoldOut: !product.isSoldOut } : product
-      )
-    );
-  };
+  // const handleDeleteProduct = (id) => {
+  //   setProducts(products.filter((product) => product.id !== id));
+  // };
 
   return (
-    <>
-      <AdminNavbar />
-      <div className="p-4 space-y-6">
-        {/* Add/Edit Product Form */}
-        <div className="flex flex-col md:flex-row gap-4">
+        <>
+
+        <AdminNavbar/>
+    
+    <div className="p-6 bg-gray-100 min-h-screen">
+      <h1 className="text-2xl font-bold mb-6">Manage Products</h1>
+
+      {/* Add Product Form */}
+      <div className="bg-white p-6 rounded shadow mb-6">
+        <h2 className="text-xl font-semibold mb-4">Add New Product</h2>
+        <div className="grid grid-cols-2 gap-4">
           <input
             type="text"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
+            name="brand"
+            placeholder="Brand"
+            value={newProduct.brand}
+            onChange={handleInputChange}
+            className="p-2 border rounded"
+          />
+          <input
+            type="text"
+            name="name"
             placeholder="Product Name"
-            className="flex-1 p-2 border border-gray-300 rounded-md w-full"
+            value={newProduct.name}
+            onChange={handleInputChange}
+            className="p-2 border rounded"
           />
           <input
             type="number"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
-            placeholder="Product Price"
-            className="flex-1 p-2 border border-gray-300 rounded-md w-full"
+            name="price"
+            placeholder="Price"
+            value={newProduct.price}
+            onChange={handleInputChange}
+            className="p-2 border rounded"
           />
           <input
             type="text"
-            value={productImage}
-            onChange={(e) => setProductImage(e.target.value)}
-            placeholder="Product Image URL"
-            className="flex-1 p-2 border border-gray-300 rounded-md w-full"
+            name="image"
+            placeholder="Image URL"
+            value={newProduct.image}
+            onChange={handleInputChange}
+            className="p-2 border rounded"
           />
-          {editingProductId ? (
-            <button
-              onClick={handleSaveEdit}
-              className="bg-green-500 text-white px-4 py-2 rounded-md w-full md:w-auto"
-            >
-              Save Edit
-            </button>
-          ) : (
-            <button
-              onClick={handleAddProduct}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full md:w-auto"
-            >
-              Add Product
-            </button>
-          )}
         </div>
-
-        {/* Products List */}
-        <div className="space-y-4">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="flex flex-col md:flex-row items-center justify-between p-4 border border-gray-200 rounded-md"
-            >
-              <div className="flex items-center space-x-4 w-full">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-16 h-16 object-cover rounded-md"
-                />
-                <div className="flex-1">
-                  <p className="font-semibold">{product.name}</p>
-                  <p className="text-gray-500">${product.price}</p>
-                  {product.isSoldOut && (
-                    <span className="text-red-500 font-semibold">Sold Out</span>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mt-4 md:mt-0">
-                <button
-                  onClick={() => handleEditProduct(product.id)}
-                  className="bg-yellow-500 text-white px-3 py-1 rounded-md w-full md:w-auto"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteProduct(product.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded-md w-full md:w-auto"
-                >
-                  Delete
-                </button>
-                <button
-                  onClick={() => handleSoldOut(product.id)}
-                  className={`${
-                    product.isSoldOut ? 'bg-gray-500' : 'bg-orange-500'
-                  } text-white px-3 py-1 rounded-md w-full md:w-auto`}
-                >
-                  {product.isSoldOut ? 'Mark Available' : 'Mark Sold Out'}
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={newProduct.description}
+          onChange={handleInputChange}
+          className="p-2 border rounded w-full mt-4"
+        />
+        <textarea
+          name="specifications"
+          placeholder="Specifications"
+          value={newProduct.specification}
+          onChange={handleInputChange}
+          className="p-2 border rounded w-full mt-4"
+        />
+        <button
+          onClick={handleAddProduct}
+          className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+        >
+          Add Product
+        </button>
       </div>
+
+      {/* Product List */}
+      <div className="bg-white p-6 rounded shadow">
+        <h2 className="text-xl font-semibold mb-4">Product List</h2>
+        <table className="w-full table-auto border-collapse">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="border p-2">Image</th>
+              <th className="border p-2">Name</th>
+              <th className="border p-2">Brand</th>
+              <th className="border p-2">Price</th>
+              <th className="border p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id} className="text-center">
+                <td className="border p-2">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-16 h-16 object-contain mx-auto"
+                  />
+                </td>
+                <td className="border p-2">{product.name}</td>
+                <td className="border p-2">{product.brand}</td>
+                <td className="border p-2">₹{product.price.toFixed(2)}</td>
+                <td className="border p-2">
+                  <button
+                    // onClick={() => handleEditProduct(product.id)}
+                    className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    // onClick={() => handleDeleteProduct(product.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
     </>
   );
 };

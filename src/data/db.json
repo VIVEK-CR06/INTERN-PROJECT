@@ -5,7 +5,7 @@
       "username": "weevek",
       "email": "weevek@gmail.com",
       "password": "11223344",
-      "role": "user",
+      "role": "admin",
       "block": false,
       "cart": [
         {
@@ -79,6 +79,24 @@
       "role": "user",
       "block": false,
       "cart": []
+    },
+    {
+      "id": "2c57",
+      "username": "casaido",
+      "email": "cas@gmail.com",
+      "password": "332211",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "e994",
+      "username": "sooraj",
+      "email": "soo@gmail.com",
+      "password": "3322",
+      "role": "user",
+      "block": false,
+      "cart": []
     }
   ],
   "orders": [
@@ -136,6 +154,46 @@
             "OS": "iOS 17"
           },
           "quantity": 2
+        }
+      ]
+    },
+    {
+      "id": "1735039709322",
+      "username": "casaido",
+      "date": "Tue Dec 24 2024 16:58:29 GMT+0530 (India Standard Time)",
+      "paymentMethod": "gpay",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": ""
+      },
+      "total": 23999,
+      "address": {
+        "name": "q",
+        "email": "vivek@gmail.com",
+        "address": "ert",
+        "city": "wr",
+        "zip": "1234"
+      },
+      "orderStatus": "Not Deliverd",
+      "paymentStatus": "paid",
+      "products": [
+        {
+          "id": "8",
+          "brand": "Poco",
+          "name": "Poco X5 Pro 5G (Astral Black, 256 GB)",
+          "price": 23999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/d/s/8/-original-imagmkjf9wqjurgf.jpeg?q=70",
+          "description": "Poco X5 Pro 5G is a versatile smartphone that offers a smooth display and impressive battery life.",
+          "specification": {
+            "Display": "6.67-inch AMOLED 120Hz",
+            "Processor": "Snapdragon 778G",
+            "Camera": "108MP + 8MP + 2MP Rear | 16MP Front",
+            "Battery": "5000 mAh",
+            "Storage": "256 GB",
+            "OS": "MIUI for Poco based on Android 12"
+          },
+          "quantity": 1
         }
       ]
     }

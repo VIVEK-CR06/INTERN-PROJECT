@@ -15,7 +15,7 @@ const AdminNavbar = () => {
         {/* Navigation Links */}
         <div className="space-x-6">
           <NavLink
-            to="/dashboard"
+            to="/dashbord"
             className={({ isActive }) =>
               `hover:text-blue-400 ${isActive ? "text-blue-400 font-semibold" : ""}`
             }
@@ -23,7 +23,7 @@ const AdminNavbar = () => {
             Dashboard
           </NavLink>
           <NavLink
-            to="/manageproduct"
+            to="/manageproducts"
             className={({ isActive }) =>
               `hover:text-blue-400 ${isActive ? "text-blue-400 font-semibold" : ""}`
             }
@@ -39,14 +39,14 @@ const AdminNavbar = () => {
             Manage Users
           </NavLink>
           <NavLink
-            to="
-            /reports"
+            to="/manageorders"
             className={({ isActive }) =>
               `hover:text-blue-400 ${isActive ? "text-blue-400 font-semibold" : ""}`
             }
           >
-            Reports
+            Orders
           </NavLink>
+          
         </div>
       </div>
     </nav>
