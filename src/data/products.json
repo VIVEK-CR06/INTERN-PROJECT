@@ -2,10 +2,10 @@
     "products": [
         
             {
-              "id": 1,
+              "id": "1",
               "brand": "Apple",
               "name": "iPhone 15 (Black, 128 GB)",
-              "price": "₹60,999",
+              "price": 60999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/h/d/9/-original-imagtc2qzgnnuhxh.jpeg?q=70",
               "description": "The Apple iPhone 15 comes with the latest A16 Bionic chip, dual camera system, and Ceramic Shield for durability.",
               "specification": {
@@ -18,10 +18,10 @@
               }
             },
             {
-              "id": 2,
+              "id": "2",
               "brand": "Samsung",
               "name": "Galaxy S23 5G (Phantom Black, 128 GB)",
-              "price": "₹42,999",
+              "price": 42999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/p/w/p/-original-imah4zp8tfzndmmh.jpeg?q=70",
               "description": "The Samsung Galaxy S23 5G offers a stunning display and triple-camera setup powered by Snapdragon 8 Gen 2.",
               "specification": {
@@ -34,10 +34,10 @@
               }
             },
             {
-              "id": 3,
+              "id": "3",
               "brand": "Google",
               "name": "Pixel 8a (Obsidian, 256 GB)",
-              "price": "₹40,999",
+              "price": 40999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/e/y/n/pixel-8a-ga04432-in-google-original-imahyn3mqzdbzywg.jpeg?q=70",
               "description": "Google Pixel 8a brings an enhanced camera and Pixel-exclusive AI features to deliver exceptional performance.",
               "specification": {
@@ -50,10 +50,10 @@
               }
             },
             {
-              "id": 4,
+              "id": "4",
               "brand": "OnePlus",
               "name": "OnePlus 11R 5G (Galactic Silver, 256 GB)",
-              "price": "₹39,999",
+              "price": 39999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/q/p/x/-original-imahf38d4cwmuqep.jpeg?q=70",
               "description": "The OnePlus 11R 5G features ultra-fast charging, a powerful Snapdragon processor, and immersive AMOLED display.",
               "specification": {
@@ -66,10 +66,10 @@
               }
             },
             {
-              "id": 5,
+              "id": "5",
               "brand": "Vivo",
               "name": "Vivo T3 Ultra (Lunar Gray, 256 GB)",
-              "price": "₹33,999",
+              "price": 33999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/s/a/s/-original-imah4hnh4z52kqqc.jpeg?q=70",
               "description": "The Vivo T3 Ultra combines style with performance, featuring a high-resolution camera and long-lasting battery.",
               "specification": {
@@ -82,10 +82,10 @@
               }
             },
             {
-              "id": 6,
+              "id": "6",
               "brand": "Realme",
               "name": "Realme GT 3 (Nitro Blue, 256 GB)",
-              "price": "₹27,999",
+              "price": 27999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/2/9/c/-original-imaghzfgbgyafbgq.jpeg?q=70",
               "description": "The Realme GT 3 is a powerful gaming phone with lightning-fast performance and ultra-fast charging.",
               "specification": {
@@ -98,10 +98,10 @@
               }
             },
             {
-              "id": 7,
+              "id": "7",
               "brand": "Xiaomi",
               "name": "Redmi Note 12 Pro  (Arctic White, 64 GB)",
-              "price": "₹24,999",
+              "price": 24999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/b/r/f/-original-imaghkvuhzwge3za.jpeg?q=70",
               "description": "Redmi Note 12 Pro 5G features a flagship-grade camera and 120Hz AMOLED display at an affordable price.",
               "specification": {
@@ -114,10 +114,10 @@
               }
             },
             {
-              "id": 8,
+              "id": "8",
               "brand": "Poco",
               "name": "Poco X5 Pro 5G (Astral Black, 256 GB)",
-              "price": "₹23,999",
+              "price": 23999,
               "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/d/s/8/-original-imagmkjf9wqjurgf.jpeg?q=70",
               "description": "Poco X5 Pro 5G is a versatile smartphone that offers a smooth display and impressive battery life.",
               "specification": {

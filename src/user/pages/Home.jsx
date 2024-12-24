@@ -1,23 +1,33 @@
+
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Catagories from "../../components/Catagories";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { fetchAllProducts } from "../../api/productApi";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [loading,setLoading] = useState(true);
+  const [error,setError] = useState(null);
+
+  const navigate = useNavigate();
+
+  const loadProducts = async () => {
+    try {
+      const response = await fetchAllProducts();
+      setProducts(response.data);
+    }
+    catch(error){
+      setError("Failed to load smartphones!")
+    }
+    finally{
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    
-    axios
-      .get("http://localhost:5003/products")
-      .then((response) => {
-        setProducts(response.data); 
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
+    loadProducts();
   }, []);
 
   return (
@@ -35,7 +45,7 @@ const Home = () => {
 
                 
 
-              <Link
+              <NavLink
                 to={`/products/${product.id}`}
                 key={product.id} 
                 className="bg-white p-2 rounded-lg shadow hover:shadow-lg transition duration-300"
@@ -49,12 +59,12 @@ const Home = () => {
                   {product.name} 
                 </h2>
                 <p className="text-gray-600 mb-4">{product.brand}</p>
-                <p className="text-gray-600 mb-4">{product.price}</p>
+                <p className="text-gray-600 mb-4">₹{product.price}</p>
                 {/* <p className="text-gray-400 mb-4">{product.description}</p> */}
                 {/* <button className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
                   Add to Cart
                 </button> */}
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>

@@ -1,44 +1,30 @@
-import React, {useState} from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Login = () => {
-  const [username , setUsername] = useState("");
+  const [usernameOrEmail, setUsernameOrEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const { userLogin } = useContext(AuthContext);
   const navigate = useNavigate();
 
-const handleLogin = async () => {
-  try{
-      const respones = await axios.get("http://localhost:5002/users",{
-        params: {username},
-      });
+  const handleLogin = async () => {
+    setError("");
+    setSuccess("");
 
-      if(!username || !password) {
-        setError('All fields are required!');
-        return;
+    try {
+      if (!usernameOrEmail || !password) {
+        throw new Error("All fields are required!");
       }
 
-      if(respones.data.length === 0){
-        setError("Incorrect username!");
-        return;
-      }
-      const user = respones.data[0];
-      if(user.password != password){
-        setError("Incorrect password!");
-        return;
-      }
-
-      localStorage.setItem("username",user.username);
-
-      navigate("/home");
-
-  }
-  catch(err){
-    setError("Error logging in")
-  }
-};
-
+      await userLogin({ usernameOrEmail, password });
+      setSuccess("Logged in successfully");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -47,22 +33,28 @@ const handleLogin = async () => {
         <div className="mb-4">
           <input
             type="text"
-            id="text"
-            onChange={(e) => setUsername(e.target.value)}
+            value={usernameOrEmail}
+            onChange={(e) => setUsernameOrEmail(e.target.value)}
             className="w-full mb-5 px-4 py-2 bg-slate-50 rounded-lg shadow-md hover:bg-slate-100 outline-none"
-            placeholder="Enter Username"
+            placeholder="Enter Username or Email"
           />
         </div>
         <div className="mb-4">
           <input
             type="password"
-            id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mb-6 bg-slate-50  rounded-lg shadow-md hover:bg-slate-100 outline-none "
+            className="w-full px-4 py-2 mb-6 bg-slate-50  rounded-lg shadow-md hover:bg-slate-100 outline-none"
             placeholder="Enter your password"
           />
           {error && <p className="text-red-500">{error}</p>}
-          <h1 className=" text-sm text-red-500">Forgott Password</h1>
+          {success && <p className="text-green-500">{success}</p>}
+          <button
+            onClick={() => navigate("/forgot-password")}
+            className="text-sm text-blue-500 hover:underline"
+          >
+            Forgot Password?
+          </button>
         </div>
         <button
           type="button"
@@ -71,13 +63,15 @@ const handleLogin = async () => {
         >
           Login
         </button>
-        <div className="flex justify-between">
-
-          <h1 className=" text-red-500 text-sm">Don't have an account?</h1>
-          {/* <navlink>Sign-Up</navlink> */}
-          <button onClick={() => navigate("/signup")} className="text-sm text-red-500">Sign Up</button>
+        <div className="flex justify-between mt-4">
+          <p className="text-gray-500 text-sm">Don't have an account?</p>
+          <button
+            onClick={() => navigate("/signup")}
+            className="text-sm text-blue-500 hover:underline"
+          >
+            Sign Up
+          </button>
         </div>
-
       </div>
     </div>
   );

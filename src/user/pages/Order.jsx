@@ -1,29 +1,24 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import { fetchOrderById } from "../../api/OrderApi";
 
 const Order = () => {
-    const orders = [
-        {
-            id: "12345",
-            date: "2024-12-10",
-            status: "Delivered",
-            total: "₹4,599",
-            items: [
-                { name: "Product A", quantity: 1, price: "₹1,999" },
-                { name: "Product B", quantity: 2, price: "₹1,300" },
-            ],
-        },
-        {
-            id: "67890",
-            date: "2024-12-05",
-            status: "Processing",
-            total: "₹2,999",
-            items: [
-                { name: "Product C", quantity: 1, price: "₹2,999" },
-            ],
-        },
-    ];
+    const [ Orders, setOrders] = useState([]);
+    const userId = localStorage.getItem("user");
+
+    useEffect(() => {
+        const fetchCart = async () => {
+            try {
+                const response = await fetchOrderById(userId);
+                setOrders(response.data);
+            }
+            catch(error){
+                console.error(error)
+            }
+        }
+        fetchCart();
+    }, []);
 
     return (
 
@@ -34,11 +29,11 @@ const Order = () => {
             <div className="container mx-auto max-w-6xl">
                 <h1 className="text-3xl font-bold text-gray-800 mb-6">My Orders</h1>
 
-                {orders.length === 0 ? (
+                {Orders.length === 0 ? (
                     <p className="text-gray-600">No orders found.</p>
                 ) : (
                     <div className="space-y-6">
-                        {orders.map((order) => (
+                        {Orders.map((order) => (
                             <div
                                 key={order.id}
                                 className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow"
@@ -66,7 +61,7 @@ const Order = () => {
 
                                 {/* Order Items */}
                                 <div className="space-y-2">
-                                    {order.items.map((item, index) => (
+                                    {order.products.map((item, index) => (
                                         <div
                                             key={index}
                                             className="flex justify-between text-gray-700"
@@ -74,7 +69,7 @@ const Order = () => {
                                             <p>
                                                 {item.name} <span className="text-sm text-gray-500">x{item.quantity}</span>
                                             </p>
-                                            <p>{item.price}</p>
+                                            <p>₹{item.price}</p>
                                         </div>
                                     ))}
                                 </div>

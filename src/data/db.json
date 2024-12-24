@@ -1,16 +1,143 @@
 {
   "users": [
     {
-      "id": "648c529abf4f1e6f2345a456",
-      "username": "john_doe",
-      "email": "john@example.com",
-      "password": "$2b$10$hashedpassword123"
+      "id": "eb80",
+      "username": "weevek",
+      "email": "weevek@gmail.com",
+      "password": "11223344",
+      "role": "user",
+      "block": false,
+      "cart": [
+        {
+          "id": "3",
+          "brand": "Google",
+          "name": "Pixel 8a (Obsidian, 256 GB)",
+          "price": 40999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/e/y/n/pixel-8a-ga04432-in-google-original-imahyn3mqzdbzywg.jpeg?q=70",
+          "description": "Google Pixel 8a brings an enhanced camera and Pixel-exclusive AI features to deliver exceptional performance.",
+          "specification": {
+            "Display": "6.3-inch FHD+ OLED",
+            "Processor": "Google Tensor G2",
+            "Camera": "64MP + 13MP Dual Rear | 13MP Front",
+            "Battery": "4300 mAh",
+            "Storage": "256 GB",
+            "OS": "Android 14"
+          },
+          "quantity": 3
+        },
+        {
+          "id": "1",
+          "brand": "Apple",
+          "name": "iPhone 15 (Black, 128 GB)",
+          "price": 60999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/h/d/9/-original-imagtc2qzgnnuhxh.jpeg?q=70",
+          "description": "The Apple iPhone 15 comes with the latest A16 Bionic chip, dual camera system, and Ceramic Shield for durability.",
+          "specification": {
+            "Display": "6.1-inch Super Retina XDR OLED",
+            "Processor": "A16 Bionic Chip",
+            "Camera": "12MP + 12MP Dual Rear | 12MP Front Camera",
+            "Battery": "3285 mAh",
+            "Storage": "128 GB",
+            "OS": "iOS 17"
+          },
+          "quantity": 2
+        }
+      ]
     },
     {
-      "id": "9b85",
-      "username": "vivek",
-      "email": "vivek@gmail.com",
-      "password": "1234"
+      "id": "e5b8",
+      "username": "bahubali",
+      "email": "aaa@gmail.com",
+      "password": "112233",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "b502",
+      "username": "messi",
+      "email": "messi@gmail.com",
+      "password": "11223344",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "944c",
+      "username": "sura",
+      "email": "sura@gmail.com",
+      "password": "2233",
+      "role": "user",
+      "block": false,
+      "cart": []
+    },
+    {
+      "id": "55af",
+      "username": "pedri",
+      "email": "pedri@gmail.com",
+      "password": "2211",
+      "role": "user",
+      "block": false,
+      "cart": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "1735015909694",
+      "userId": "e5b8",
+      "date": "Tue Dec 24 2024 10:21:49 GMT+0530 (India Standard Time)",
+      "paymentMethod": "gpay",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": ""
+      },
+      "total": 164997,
+      "address": {
+        "name": "vivek cr",
+        "email": "vivek@gmail.com",
+        "address": "2334tfdfgh",
+        "city": "1122345korie",
+        "zip": "123456"
+      },
+      "orderStatus": "Not Deliverd",
+      "paymentStatus": "paid",
+      "products": [
+        {
+          "id": "2",
+          "brand": "Samsung",
+          "name": "Galaxy S23 5G (Phantom Black, 128 GB)",
+          "price": 42999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/p/w/p/-original-imah4zp8tfzndmmh.jpeg?q=70",
+          "description": "The Samsung Galaxy S23 5G offers a stunning display and triple-camera setup powered by Snapdragon 8 Gen 2.",
+          "specification": {
+            "Display": "6.1-inch Dynamic AMOLED 2X",
+            "Processor": "Snapdragon 8 Gen 2",
+            "Camera": "50MP + 12MP + 10MP Rear | 12MP Front",
+            "Battery": "3900 mAh",
+            "Storage": "128 GB",
+            "OS": "Android 13"
+          },
+          "quantity": 1
+        },
+        {
+          "id": "1",
+          "brand": "Apple",
+          "name": "iPhone 15 (Black, 128 GB)",
+          "price": 60999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/h/d/9/-original-imagtc2qzgnnuhxh.jpeg?q=70",
+          "description": "The Apple iPhone 15 comes with the latest A16 Bionic chip, dual camera system, and Ceramic Shield for durability.",
+          "specification": {
+            "Display": "6.1-inch Super Retina XDR OLED",
+            "Processor": "A16 Bionic Chip",
+            "Camera": "12MP + 12MP Dual Rear | 12MP Front Camera",
+            "Battery": "3285 mAh",
+            "Storage": "128 GB",
+            "OS": "iOS 17"
+          },
+          "quantity": 2
+        }
+      ]
     }
   ]
 }

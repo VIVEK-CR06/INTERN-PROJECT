@@ -1,61 +1,72 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import payment2 from "../../assets/payment2.jpeg";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../contexts/CartContext";
+import { addNewOrder } from "../../api/OrderApi";
 
 const Checkout = () => {
-    const [cartItems, setCartItems] = useState([]);
-    const [billingDetails, setBillingDetails] = useState({
+    const [successMessage , setSuccessMessage ] = useState('');
+    const navigate = useNavigate();
+    const { cartItems, clearCart} = useContext(CartContext);
+
+    const [formData, setFormData] = useState({
         name: "",
         email: "",
         address: "",
         city: "",
         zip: "",
     });
-    const [paymentMethod, setPaymentMethod] = useState("gpay");
-    const [cardDetails, setCardDetails] = useState({
+    const [paymentMethod, setPaymentMethod] = useState(" ");
+    const [paymentDetails, setPaymentDetails] = useState({
         cardNumber: "",
         expiry: "",
         cvv: "",
     });
 
-    useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-        setCartItems(savedCart);
-    }, []);
-
     const totalPrice = cartItems.reduce(
         (total, item) =>
-            total + parseInt(item.price.replace("₹", "").replace(",", "")) * item.quantity,
+            total + item.price * item.quantity,
         0
     );
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setBillingDetails({ ...billingDetails, [name]: value });
+        setFormData({ ...formData, [name]: value });
     };
 
     const handlePaymentChange = (e) => {
         setPaymentMethod(e.target.value);
     };
 
-    const handleCardDetailsChange = (e) => {
+    const handlePaymentDetailsChange = (e) => {
         const { name, value } = e.target;
-        setCardDetails({ ...cardDetails, [name]: value });
+        setPaymentDetails({ ...paymentDetails, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const orderDetails = { billingDetails, cartItems, paymentMethod };
-
-        if (paymentMethod === "debit") {
-            orderDetails.cardDetails = cardDetails;
+        setSuccessMessage('Order placed Successfully')
+        const newOrder = {
+            id: Date.now().toString(),
+            userId: localStorage.getItem("user"),
+            date: Date(),
+            paymentMethod: paymentMethod,
+            paymentDetails: paymentDetails,
+            total: totalPrice,
+            address: formData,
+            orderStatus: "Not Deliverd",
+            paymentStatus: "paid",
+            products: cartItems
         }
+        await addNewOrder(newOrder);
+        clearCart();
+        setTimeout(() => {
+            setSuccessMessage('');
+            navigate('/order')
+        }, 2000);
 
-        console.log("Order Placed!", orderDetails);
-        alert(`Order placed successfully using ${paymentMethod.toUpperCase()}!`);
-        localStorage.removeItem("cart");
-        setCartItems([]);
     };
 
     return (
@@ -83,7 +94,7 @@ const Checkout = () => {
                                             </p>
                                         </div>
                                         <p className="text-gray-800 font-semibold">
-                                            ₹{(item.price.replace("₹", "").replace(",", "") * item.quantity).toLocaleString()}
+                                            ₹{(item.price * item.quantity)}
                                         </p>
                                     </div>
                                 ))}
@@ -91,7 +102,7 @@ const Checkout = () => {
                             <div className="mt-6 border-t pt-4">
                                 <div className="flex justify-between font-semibold text-gray-800">
                                     <p>Total Price:</p>
-                                    <p>₹{totalPrice.toLocaleString()}</p>
+                                    <p>₹{totalPrice}</p>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +118,7 @@ const Checkout = () => {
                                 <input
                                     type="text"
                                     name="name"
-                                    value={billingDetails.name}
+                                    value={formData.name}
                                     onChange={handleInputChange}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded"
@@ -119,7 +130,7 @@ const Checkout = () => {
                                 <input
                                     type="email"
                                     name="email"
-                                    value={billingDetails.email}
+                                    value={formData.email}
                                     onChange={handleInputChange}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded"
@@ -130,7 +141,7 @@ const Checkout = () => {
                                 <label className="block text-gray-700 mb-2">Address</label>
                                 <textarea
                                     name="address"
-                                    value={billingDetails.address}
+                                    value={formData.address}
                                     onChange={handleInputChange}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded"
@@ -142,7 +153,7 @@ const Checkout = () => {
                                 <input
                                     type="text"
                                     name="city"
-                                    value={billingDetails.city}
+                                    value={formData.city}
                                     onChange={handleInputChange}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded"
@@ -154,7 +165,7 @@ const Checkout = () => {
                                 <input
                                     type="text"
                                     name="zip"
-                                    value={billingDetails.zip}
+                                    value={formData.zip}
                                     onChange={handleInputChange}
                                     required
                                     className="w-full p-2 border border-gray-300 rounded"
