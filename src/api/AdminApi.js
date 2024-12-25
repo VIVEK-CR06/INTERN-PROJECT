@@ -25,7 +25,8 @@ export const addProducts = async (data) => {
 }
 
 export const updateProduct = async (id, data) => {
-    return await axios.patch(`${ProductURL}/${id}`, data);
+    await axios.put(`${ProductURL}/${id}`, data);
+    return await fetchProducts();
 }
 
 export const deleteProduct = async (id) => {

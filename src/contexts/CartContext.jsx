@@ -15,7 +15,6 @@ export const CartProvider = ({ children }) => {
             const fetchData = async () => {
                 try {
                     const response = await fetchCartItemsById(userId);
-                    console.log(response.data)
                     setUserData(response.data)
                     setCartItems(response.data.cart || []);
                 } catch (error) {
@@ -65,7 +64,6 @@ export const CartProvider = ({ children }) => {
     };
 
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    console.log(totalPrice)
     const getTotalPriceOfProduct = (item) => {
         return item.price * item.quantity;
     }

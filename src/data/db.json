@@ -97,6 +97,15 @@
       "role": "user",
       "block": false,
       "cart": []
+    },
+    {
+      "id": "ec23",
+      "username": "bridgeon",
+      "email": "bri@gmail.com",
+      "password": "12321",
+      "role": "user",
+      "block": false,
+      "cart": []
     }
   ],
   "orders": [
@@ -179,6 +188,47 @@
             "OS": "OxygenOS based on Android 13"
           },
           "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "1735135944874",
+      "username": "bridgeon",
+      "userId": "ec23",
+      "date": "Wed Dec 25 2024 19:42:24 GMT+0530 (India Standard Time)",
+      "paymentMethod": "cod",
+      "paymentDetails": {
+        "cardNumber": "",
+        "expiry": "",
+        "cvv": ""
+      },
+      "total": 374997,
+      "address": {
+        "name": "bridg",
+        "email": "bri@gmail.com",
+        "address": "bridgeon smart system",
+        "city": "kakkanchery",
+        "zip": "09876"
+      },
+      "orderStatus": "Not Deliverd",
+      "paymentStatus": "paid",
+      "products": [
+        {
+          "id": "503a",
+          "brand": "Google",
+          "name": "Google Pixel 9 Pro XL (Hazel, 256 GB)",
+          "price": "124999",
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/9/9/5/pixel-9-pro-xl-ga05985-in-google-original-imah3pffmvyyjcdn.jpeg?q=70",
+          "description": "Meet Pixel 9 Pro XL with Gemini. It has a sleek, stunning design and it's the most powerful Pixel yet.",
+          "specification": {
+            "display": "17.27 cm (6.8 inch)",
+            "processor": "Google Tensor G4 Processor",
+            "camera": "50MP + 48MP + 48MP | 42MP Front",
+            "battery": "5060 mAh",
+            "storage": "16 GB RAM | 256 GB ROM",
+            "os": "Google"
+          },
+          "quantity": 3
         }
       ]
     }

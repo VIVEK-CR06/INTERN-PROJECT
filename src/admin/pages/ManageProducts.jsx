@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
-import { fetchProducts } from '../../api/AdminApi';
-import { addProducts, deleteProduct } from '../../api/AdminApi';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { fetchProducts, addProducts, deleteProduct } from '../../api/AdminApi';
+import { useNavigate } from 'react-router-dom';
 
 const ManageProducts = () => {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
   const [newProduct, setNewProduct] = useState({
     brand: '',
     name: '',
@@ -21,9 +19,24 @@ const ManageProducts = () => {
     os: '',
   });
   const [showAddProduct, setShowAddProduct] = useState(false);
+  const [loading, setLoading] = useState(true); // Loading state for fetching products
+  const [error, setError] = useState(null); // Error state for fetching products
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProducts().then((res) => setProducts(res.data));
+    const fetchAllProducts = async () => {
+      try {
+        setLoading(true);
+        const res = await fetchProducts();
+        setProducts(res.data);
+      } catch (error) {
+        setError('Failed to load products, please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAllProducts();
   }, []);
 
   const handleInputChange = (e) => {
@@ -47,52 +60,55 @@ const ManageProducts = () => {
         os: newProduct.os,
       },
     };
-    const response = await addProducts(product);
-    if (response.status === 201) {
-      setProducts([...products, { ...newProduct, id: response.data.id }]);
+    try {
+      const response = await addProducts(product);
+      if (response.status === 201) {
+        setProducts([...products, { ...newProduct, id: response.data.id }]);
+        setNewProduct({
+          brand: '',
+          name: '',
+          price: '',
+          image: '',
+          description: '',
+          display: '',
+          processor: '',
+          camera: '',
+          battery: '',
+          storage: '',
+          os: '',
+        });
+        setShowAddProduct(false);
+      }
+    } catch (error) {
+      setError('Failed to add the product, please try again later.');
     }
-    setNewProduct({
-      brand: '',
-      name: '',
-      price: '',
-      image: '',
-      description: '',
-      display: '',
-      processor: '',
-      camera: '',
-      battery: '',
-      storage: '',
-      os: '',
-    });
-    setShowAddProduct(false); // Hide form after adding
   };
 
   const handleEditProduct = (product) => {
-    navigate('/updateproduct', { state: { product } });
+    localStorage.setItem("productId", product.id);
+    navigate('/updateproduct');
   };
-  
 
-  const handleDeleteProduct = (id) => {
-    setProducts(products.filter((product) => product.id !== id));
-    deleteProduct(id);
+  const handleDeleteProduct = async (id) => {
+    try {
+      setProducts(products.filter((product) => product.id !== id));
+      await deleteProduct(id);
+    } catch (error) {
+      setError('Failed to delete the product, please try again later.');
+    }
   };
 
   return (
     <>
       <AdminNavbar />
-
       <div className="p-6 bg-gray-100 min-h-screen">
         <h1 className="text-2xl font-bold mb-6">Manage Products</h1>
-
-        {/* Toggle Add Product Form */}
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded mb-4"
           onClick={() => setShowAddProduct(!showAddProduct)}
         >
           {showAddProduct ? '<< Back' : 'Add Product'}
         </button>
-
-        {/* Add Product Form */}
         {showAddProduct && (
           <div className="bg-white p-6 rounded shadow mb-6">
             <h2 className="text-xl font-semibold mb-4">Add New Product</h2>
@@ -131,7 +147,6 @@ const ManageProducts = () => {
                   className="p-2 border rounded"
                 />
               </div>
-
               <textarea
                 name="description"
                 placeholder="Description"
@@ -139,61 +154,22 @@ const ManageProducts = () => {
                 onChange={handleInputChange}
                 className="p-2 border rounded w-full"
               />
-
               <div className="bg-gray-50 p-4 rounded shadow-inner space-y-4">
                 <h3 className="text-lg font-medium mb-2">Specifications</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="display"
-                    placeholder="Display"
-                    value={newProduct.display}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    name="processor"
-                    placeholder="Processor"
-                    value={newProduct.processor}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    name="camera"
-                    placeholder="Camera"
-                    value={newProduct.camera}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    name="battery"
-                    placeholder="Battery"
-                    value={newProduct.battery}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    name="storage"
-                    placeholder="Storage"
-                    value={newProduct.storage}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
-                  <input
-                    type="text"
-                    name="os"
-                    placeholder="Operating System"
-                    value={newProduct.os}
-                    onChange={handleInputChange}
-                    className="p-2 border rounded"
-                  />
+                  {['display', 'processor', 'camera', 'battery', 'storage', 'os'].map((spec) => (
+                    <input
+                      key={spec}
+                      type="text"
+                      name={spec}
+                      placeholder={spec.charAt(0).toUpperCase() + spec.slice(1)}
+                      value={newProduct[spec]}
+                      onChange={handleInputChange}
+                      className="p-2 border rounded"
+                    />
+                  ))}
                 </div>
               </div>
-
               <button
                 type="button"
                 onClick={handleAddProduct}
@@ -204,52 +180,55 @@ const ManageProducts = () => {
             </form>
           </div>
         )}
-
-        {/* Product List */}
-        <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold mb-4">Product List</h2>
-          <table className="w-full table-auto border-collapse">
-            <thead>
-              <tr className="bg-gray-200">
-                <th className="border p-2">Image</th>
-                <th className="border p-2">Name</th>
-                <th className="border p-2">Brand</th>
-                <th className="border p-2">Price</th>
-                <th className="border p-2">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id} className="text-center">
-                  <td className="border p-2">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-16 h-16 object-contain mx-auto"
-                    />
-                  </td>
-                  <td className="border p-2">{product.name}</td>
-                  <td className="border p-2">{product.brand}</td>
-                  <td className="border p-2">₹{product.price}</td>
-                  <td className="border p-2">
-                  <NavLink
-                   to="/updateproduct"
-                  onClick={() => handleEditProduct(product)}
-                   className="bg-yellow-500 text-white px-2 py-1 rounded mr-2">
-                    Edit
-                    </NavLink>
-                    <button
-                      onClick={() => handleDeleteProduct(product.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded"
-                    >
-                      Delete
-                    </button>
-                  </td>
+        {error && <div className="text-red-500 mb-4">{error}</div>}
+        {loading ? (
+          <div>Loading products...</div>
+        ) : (
+          <div className="bg-white p-6 rounded shadow">
+            <h2 className="text-xl font-semibold mb-4">Product List</h2>
+            <table className="w-full table-auto border-collapse">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="border p-2">Image</th>
+                  <th className="border p-2">Name</th>
+                  <th className="border p-2">Brand</th>
+                  <th className="border p-2">Price</th>
+                  <th className="border p-2">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {products.map((product) => (
+                  <tr key={product.id} className="text-center">
+                    <td className="border p-2">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-16 h-16 object-contain mx-auto"
+                      />
+                    </td>
+                    <td className="border p-2">{product.name}</td>
+                    <td className="border p-2">{product.brand}</td>
+                    <td className="border p-2">₹{product.price}</td>
+                    <td className="border p-2">
+                      <button
+                        onClick={() => handleEditProduct(product)}
+                        className="bg-yellow-500 text-white px-2 py-1 rounded mr-2"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleDeleteProduct(product.id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </>
   );

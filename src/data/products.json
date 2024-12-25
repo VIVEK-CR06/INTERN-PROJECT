@@ -39,11 +39,18 @@
       "price": 40999,
       "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/e/y/n/pixel-8a-ga04432-in-google-original-imahyn3mqzdbzywg.jpeg?q=70",
       "description": "Google Pixel 8a brings an enhanced camera and Pixel-exclusive AI features to deliver exceptional performance.",
-      "specification": {}
+      "specification": {
+        "Display": "6.3-inch FHD+ OLED",
+        "Processor": "Google Tensor G2",
+        "Camera": "64MP + 13MP Dual Rear | 13MP Front",
+        "Battery": "4300 mAh",
+        "Storage": "256 GB",
+        "OS": "Android 14"
+      }
     },
     {
       "id": "4",
-      "brand": "OnePlus",
+      "brand": "OnePlus ",
       "name": "OnePlus 11R 5G (Galactic Silver, 256 GB)",
       "price": 39999,
       "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/q/p/x/-original-imahf38d4cwmuqep.jpeg?q=70",
@@ -128,7 +135,30 @@
       "price": "124999",
       "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/9/9/5/pixel-9-pro-xl-ga05985-in-google-original-imah3pffmvyyjcdn.jpeg?q=70",
       "description": "Meet Pixel 9 Pro XL with Gemini. It has a sleek, stunning design and it's the most powerful Pixel yet.",
-      "specification": {}
+      "specification": {
+        "display": "17.27 cm (6.8 inch)",
+        "processor": "Google Tensor G4 Processor",
+        "camera": "50MP + 48MP + 48MP | 42MP Front",
+        "battery": "5060 mAh",
+        "storage": "16 GB RAM | 256 GB ROM",
+        "os": "Google"
+      }
+    },
+    {
+      "id": "b473",
+      "brand": "Vivo",
+      "name": "vivo X200 Pro 5G (Cosmos Black, 512 GB)",
+      "price": "94999",
+      "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/f/4/h/-original-imah7btvyyzaczbz.jpeg?q=70",
+      "description": "Telephoto Hyperzoom: Get closer than ever, without compromising quality. ",
+      "specification": {
+        "display": "17.22 cm (6.78 inch) ",
+        "processor": " Dimensity 9400",
+        "camera": "50MP + 50MP + 200MP | 32MP",
+        "battery": "6000 mAh ",
+        "storage": "16 GB RAM | 512 GB ROM",
+        "os": "funtouch OS"
+      }
     }
   ]
 }
