@@ -51,6 +51,7 @@ const Checkout = () => {
         const newOrder = {
             id: Date.now().toString(),
             username: localStorage.getItem("username"),
+            userId: localStorage.getItem("user"),
             date: Date(),
             paymentMethod: paymentMethod,
             paymentDetails: paymentDetails,
@@ -65,7 +66,7 @@ const Checkout = () => {
         setTimeout(() => {
             setSuccessMessage('');
             navigate('/order')
-        }, 2000);
+        }, 1000);
 
     };
 
@@ -230,8 +231,8 @@ const Checkout = () => {
                                         <input
                                             type="text"
                                             name="cardNumber"
-                                            value={cardDetails.cardNumber}
-                                            onChange={handleCardDetailsChange}
+                                            value={paymentDetails.cardNumber}
+                                            onChange={handlePaymentDetailsChange}
                                             required
                                             className="w-full p-2 border border-gray-300 rounded"
                                             placeholder="Enter card number"
@@ -242,8 +243,8 @@ const Checkout = () => {
                                         <input
                                             type="text"
                                             name="expiry"
-                                            value={cardDetails.expiry}
-                                            onChange={handleCardDetailsChange}
+                                            value={paymentDetails.expiry}
+                                            onChange={handlePaymentDetailsChange}
                                             required
                                             className="w-full p-2 border border-gray-300 rounded"
                                             placeholder="MM/YY"
@@ -254,8 +255,8 @@ const Checkout = () => {
                                         <input
                                             type="password"
                                             name="cvv"
-                                            value={cardDetails.cvv}
-                                            onChange={handleCardDetailsChange}
+                                            value={paymentDetails.cvv}
+                                            onChange={handlePaymentDetailsChange}
                                             required
                                             className="w-full p-2 border border-gray-300 rounded"
                                             placeholder="Enter CVV"

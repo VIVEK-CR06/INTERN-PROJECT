@@ -20,5 +20,14 @@ export const updateUser = async (id, data) => {
     return await axios.patch(`${UserURL}/${id}`, data);
 }
 
+export const addProducts = async (data) => {
+    return await axios.post(ProductURL, data);
+}
 
+export const updateProduct = async (id, data) => {
+    return await axios.patch(`${ProductURL}/${id}`, data);
+}
 
+export const deleteProduct = async (id) => {
+    return await axios.delete(`${ProductURL}/${id}`);
+}

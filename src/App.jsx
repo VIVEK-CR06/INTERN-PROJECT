@@ -8,6 +8,7 @@ import ManageProducts from './admin/pages/ManageProducts';
 import ManageUsers from './admin/pages/ManageUsers';
 import Dashboard from './admin/pages/Dashboard';
 import ManageOrders from './admin/pages/ManageOrders';
+import UpdateProduct from './admin/pages/UpdateProduct';
 
 import Login from './Authentication/pages/Login';
 import SignUp from './Authentication/pages/SignUp';
@@ -37,6 +38,7 @@ const App = () => {
           <Route path='/manageproducts' element={<ManageProducts/>} />
           <Route path='/manageusers' element={<ManageUsers/>} />
           <Route path='/manageorders' element={<ManageOrders/>} />
+          <Route path='/updateproduct' element={<UpdateProduct/>} />
 
           <Route
             path='/cart'

@@ -101,97 +101,82 @@
   ],
   "orders": [
     {
-      "id": "1735015909694",
-      "userId": "e5b8",
-      "date": "Tue Dec 24 2024 10:21:49 GMT+0530 (India Standard Time)",
+      "id": "1735055593228",
+      "username": "casaido",
+      "userId": "2c57",
+      "date": "Tue Dec 24 2024 21:23:13 GMT+0530 (India Standard Time)",
       "paymentMethod": "gpay",
       "paymentDetails": {
         "cardNumber": "",
         "expiry": "",
         "cvv": ""
       },
-      "total": 164997,
+      "total": 40999,
       "address": {
-        "name": "vivek cr",
-        "email": "vivek@gmail.com",
-        "address": "2334tfdfgh",
-        "city": "1122345korie",
-        "zip": "123456"
+        "name": "cas",
+        "email": "cas@gmail.com",
+        "address": "visc catalonia",
+        "city": "spain",
+        "zip": "2345654"
       },
       "orderStatus": "Not Deliverd",
       "paymentStatus": "paid",
       "products": [
         {
-          "id": "2",
-          "brand": "Samsung",
-          "name": "Galaxy S23 5G (Phantom Black, 128 GB)",
-          "price": 42999,
-          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/p/w/p/-original-imah4zp8tfzndmmh.jpeg?q=70",
-          "description": "The Samsung Galaxy S23 5G offers a stunning display and triple-camera setup powered by Snapdragon 8 Gen 2.",
+          "id": "3",
+          "brand": "Google",
+          "name": "Pixel 8a (Obsidian, 256 GB)",
+          "price": 40999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/e/y/n/pixel-8a-ga04432-in-google-original-imahyn3mqzdbzywg.jpeg?q=70",
+          "description": "Google Pixel 8a brings an enhanced camera and Pixel-exclusive AI features to deliver exceptional performance.",
           "specification": {
-            "Display": "6.1-inch Dynamic AMOLED 2X",
-            "Processor": "Snapdragon 8 Gen 2",
-            "Camera": "50MP + 12MP + 10MP Rear | 12MP Front",
-            "Battery": "3900 mAh",
-            "Storage": "128 GB",
-            "OS": "Android 13"
+            "Display": "6.3-inch FHD+ OLED",
+            "Processor": "Google Tensor G2",
+            "Camera": "64MP + 13MP Dual Rear | 13MP Front",
+            "Battery": "4300 mAh",
+            "Storage": "256 GB",
+            "OS": "Android 14"
           },
           "quantity": 1
-        },
-        {
-          "id": "1",
-          "brand": "Apple",
-          "name": "iPhone 15 (Black, 128 GB)",
-          "price": 60999,
-          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/h/d/9/-original-imagtc2qzgnnuhxh.jpeg?q=70",
-          "description": "The Apple iPhone 15 comes with the latest A16 Bionic chip, dual camera system, and Ceramic Shield for durability.",
-          "specification": {
-            "Display": "6.1-inch Super Retina XDR OLED",
-            "Processor": "A16 Bionic Chip",
-            "Camera": "12MP + 12MP Dual Rear | 12MP Front Camera",
-            "Battery": "3285 mAh",
-            "Storage": "128 GB",
-            "OS": "iOS 17"
-          },
-          "quantity": 2
         }
       ]
     },
     {
-      "id": "1735039709322",
-      "username": "casaido",
-      "date": "Tue Dec 24 2024 16:58:29 GMT+0530 (India Standard Time)",
+      "id": "1735056042850",
+      "username": "sooraj",
+      "userId": "e994",
+      "date": "Tue Dec 24 2024 21:30:42 GMT+0530 (India Standard Time)",
       "paymentMethod": "gpay",
       "paymentDetails": {
         "cardNumber": "",
         "expiry": "",
         "cvv": ""
       },
-      "total": 23999,
+      "total": 39999,
       "address": {
-        "name": "q",
-        "email": "vivek@gmail.com",
-        "address": "ert",
-        "city": "wr",
-        "zip": "1234"
+        "name": "sooraj",
+        "email": "soo@gmail.com",
+        "address": "sura nagar, palakkad",
+        "city": "pyalakkad",
+        "zip": "5432"
       },
       "orderStatus": "Not Deliverd",
       "paymentStatus": "paid",
       "products": [
         {
-          "id": "8",
-          "brand": "Poco",
-          "name": "Poco X5 Pro 5G (Astral Black, 256 GB)",
-          "price": 23999,
-          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/d/s/8/-original-imagmkjf9wqjurgf.jpeg?q=70",
-          "description": "Poco X5 Pro 5G is a versatile smartphone that offers a smooth display and impressive battery life.",
+          "id": "4",
+          "brand": "OnePlus",
+          "name": "OnePlus 11R 5G (Galactic Silver, 256 GB)",
+          "price": 39999,
+          "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/q/p/x/-original-imahf38d4cwmuqep.jpeg?q=70",
+          "description": "The OnePlus 11R 5G features ultra-fast charging, a powerful Snapdragon processor, and immersive AMOLED display.",
           "specification": {
-            "Display": "6.67-inch AMOLED 120Hz",
-            "Processor": "Snapdragon 778G",
-            "Camera": "108MP + 8MP + 2MP Rear | 16MP Front",
+            "Display": "6.74-inch AMOLED 120Hz",
+            "Processor": "Snapdragon 8+ Gen 1",
+            "Camera": "50MP + 8MP + 2MP Rear | 16MP Front",
             "Battery": "5000 mAh",
             "Storage": "256 GB",
-            "OS": "MIUI for Poco based on Android 12"
+            "OS": "OxygenOS based on Android 13"
           },
           "quantity": 1
         }
