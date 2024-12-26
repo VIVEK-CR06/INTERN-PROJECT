@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const UserURL = "http://localhost:5003/users";
-const OrderURL = "http://localhost:5003/orders";
-const ProductURL = "http://localhost:5002/products";
+const UserURL = "https://e-app-server-wjvm.onrender.com/users";
+const OrderURL = "https://e-app-server-wjvm.onrender.com/orders";
+const ProductURL = "https://e-app-server-wjvm.onrender.com/products";
 
 export const fetchUsers = async () => {
   return await axios.get(UserURL);

@@ -13,6 +13,7 @@ const Navbar = () => {
   const username = localStorage.getItem("username")
   const {logout} = useContext(AuthContext);
   const {cartItems} = useContext(CartContext);
+  
 
   const handleCartClick = () => {
     if (!user) {

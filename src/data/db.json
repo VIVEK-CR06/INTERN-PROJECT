@@ -50,7 +50,7 @@
       "email": "aaa@gmail.com",
       "password": "112233",
       "role": "user",
-      "block": false,
+      "block": true,
       "cart": []
     },
     {
